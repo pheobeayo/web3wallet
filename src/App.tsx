@@ -30,6 +30,7 @@ function App() {
   const [provider, setProvider] = useState<
     ethers.BrowserProvider | ethers.AbstractProvider | null
   >(null);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [network, setNetwork] = useState<Network>();
 
   const { account } = useWallet(signer, setSigner, provider);
@@ -39,7 +40,6 @@ function App() {
     decimals,
     totalSupply,
     userUSDTBalance,
-    usdtContract,
     writableUsdtContract,
     listenerUsdtContract,
   } = useUsdtContract(provider, signer, webSocketProvider, account);
@@ -53,7 +53,8 @@ function App() {
 
   useEffect(() => {
     if (listenerUsdtContract && account) {
-      listenerUsdtContract.on("Transfer", (from, to, amount, event) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      listenerUsdtContract.on("Transfer", (from, to, amount) => {
         console.log(
           `Transfer Detected from ${from} to ${to}: ${ethers.formatUnits(
             amount,
